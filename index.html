@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title> Casamento  R  |  A </title>
+  <title>Casamento R | A</title>
   <style>
     /* Carregando a fonte personalizada */
     @font-face {
@@ -72,20 +72,26 @@
       color: red;
     }
 
-    /* Rodapé com flores delicadas */
-    .footer {
-      margin-top: 60px;
-      padding: 20px;
-      background: url("flores.png") no-repeat center bottom;
-      background-size: contain;
-      height: 120px;
-    }
+    body {
+  background: url("aquarela_borda.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+/* Moldura */
+.page-wrapper {
+  border: 60px solid transparent;
+  -webkit-border-image: url("aquarela_borda.jpg") 60 round; 
+  border-image: url("sua-imagem.png") 60 round;
+  min-height: 100vh;
+}
   </style>
 </head>
 <body>
 
-  <h1> Casamento   R  |  A </h1>
-  <p>Compartilhe suas fotos e vídeos deste momento especial!</p>
+  <h1> Casamento R | A </h1>
+  <p>Compartilhe suas fotos e vídeos deste momento especial</p>
 
   <div class="upload-box">
     <input type="file" id="fileInput" accept="image/*,video/*">
