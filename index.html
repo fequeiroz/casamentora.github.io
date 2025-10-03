@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Casamento - Compartilhe seus momentos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fdf6f9;
+      padding: 50px;
+    }
+    h1 {
+      font-family: "Brush Script MT", cursive;
+      font-size: 48px;
+      color: #c2185b;
+    }
+    .upload-box {
+      margin-top: 30px;
+      padding: 40px;
+      border: 2px dashed #c2185b;
+      border-radius: 15px;
+      background: #fff;
+      display: inline-block;
+    }
+    input[type="file"] {
+      display: block;
+      margin: 20px auto;
+    }
+    button {
+      background: #c2185b;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    button:hover {
+      background: #a3154a;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 16px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✨ Casamento R | A ✨</h1>
+  <p>Compartilhe suas fotos e vídeos deste momento especial</p>
+
+  <div class="upload-box">
+    <input type="file" id="fileInput" accept="image/*,video/*">
+    <button onclick="uploadFile()">Enviar Foto/Vídeo</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT";
+
+    async function uploadFile() {
+      const fileInput = document.getElementById("fileInput");
+      if (fileInput.files.length === 0) {
+        alert("Selecione uma foto ou vídeo antes de enviar.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const base64Data = e.target.result.split(",")[1];
+
+        const formData = new URLSearchParams();
+        formData.append("filename", file.name);
+        formData.append("mimetype", file.type);
+        formData.append("data", base64Data);
+
+        try {
+          const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            body: formData
+          });
+          const result = await response.json();
+          if (result.status === "success") {
+            document.getElementById("message").innerText = "✅ Arquivo enviado com sucesso!";
+          } else {
+            document.getElementById("message").innerText = "❌ Erro: " + result.message;
+          }
+        } catch (error) {
+          document.getElementById("message").innerText = "❌ Erro de conexão.";
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+
+</body>
+</html>
