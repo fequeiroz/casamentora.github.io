@@ -2,53 +2,89 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Casamento - Compartilhe seus momentos</title>
+  <title>Casamento R | A</title>
   <style>
+    /* Carregando a fonte personalizada */
+    @font-face {
+      font-family: "DearScript";
+      src: url("Dear Script (Demo_Font).otf") format("opentype");
+    }
+
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background: #ede7a1;
-      padding: 50px;
+      background: #ffffff;
+      padding: 40px;
+      margin: 0;
     }
+
     h1 {
-      font-family: "Brush Script MT", cursive;
-      font-size: 48px;
+      font-family: "DearScript", cursive;
+      font-size: 52px;
       color: #000000;
+      margin-bottom: 10px;
     }
+
+    p {
+      font-size: 18px;
+      color: #333333;
+      margin: 10px 0;
+    }
+
     .upload-box {
       margin-top: 30px;
       padding: 40px;
-      border: 2px dashed #c2185b;
+      border: 2px dashed #000000;
       border-radius: 15px;
       background: #fff;
       display: inline-block;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
     }
+
     input[type="file"] {
       display: block;
       margin: 20px auto;
     }
+
     button {
-      background: #f0ead0;
+      background: #7c7c7c;
       color: white;
       padding: 12px 25px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 18px;
+      transition: background 0.3s ease;
     }
     button:hover {
-      background: #a3154a;
+      background: #3d3d3d;
     }
+
     #message {
       margin-top: 20px;
       font-size: 16px;
+      font-weight: bold;
+    }
+    #message.success {
       color: green;
+    }
+    #message.error {
+      color: red;
+    }
+
+    /* Rodapé com flores delicadas */
+    .footer {
+      margin-top: 60px;
+      padding: 20px;
+      background: url("flores.png") no-repeat center bottom;
+      background-size: contain;
+      height: 120px;
     }
   </style>
 </head>
 <body>
 
-  <h1>✨ Casamento R | A ✨</h1>
+  <h1> Casamento R | A </h1>
   <p>Compartilhe suas fotos e vídeos deste momento especial</p>
 
   <div class="upload-box">
@@ -57,11 +93,16 @@
     <p id="message"></p>
   </div>
 
+  <div class="footer"></div>
+
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTrXhAmBg2WmTvaF_fztuk7jpULrvwofssgBkSghAaeXpKTjBgYwXD6Axe146fAoyq/exec";
 
     async function uploadFile() {
       const fileInput = document.getElementById("fileInput");
+      const messageEl = document.getElementById("message");
+      messageEl.innerText = "";
+
       if (fileInput.files.length === 0) {
         alert("Selecione uma foto ou vídeo antes de enviar.");
         return;
@@ -84,12 +125,16 @@
           });
           const result = await response.json();
           if (result.status === "success") {
-            document.getElementById("message").innerText = "✅ Arquivo enviado com sucesso!";
+            messageEl.className = "success";
+            messageEl.innerText = "✅ Arquivo enviado com sucesso!";
+            fileInput.value = ""; // limpa o campo
           } else {
-            document.getElementById("message").innerText = "❌ Erro: " + result.message;
+            messageEl.className = "error";
+            messageEl.innerText = "❌ Erro: " + result.message;
           }
         } catch (error) {
-          document.getElementById("message").innerText = "❌ Erro de conexão.";
+          messageEl.className = "error";
+          messageEl.innerText = "❌ Erro de conexão.";
         }
       };
       reader.readAsDataURL(file);
