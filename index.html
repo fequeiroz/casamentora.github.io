@@ -33,15 +33,15 @@
 
     h1 {
       font-family: "DearScript", cursive;
-      font-size: 52px;
+      font-size: 64px;
       color: #000000;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     p {
-      font-size: 18px;
+      font-size: 22px;
       color: #333333;
-      margin: 10px 0;
+      margin: 15px 0;
     }
 
     .upload-box {
@@ -52,23 +52,24 @@
       background: #fff;
       box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
       width: 100%;
-      max-width: 600px;
+      max-width: 700px;
       box-sizing: border-box;
     }
 
     input[type="file"] {
       display: block;
       margin: 20px auto;
+      font-size: 18px;
     }
 
     button {
       background: #7c7c7c;
       color: white;
-      padding: 12px 25px;
+      padding: 14px 30px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
       transition: background 0.3s ease;
     }
 
@@ -78,7 +79,7 @@
 
     #message {
       margin-top: 20px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
     }
 
@@ -88,6 +89,61 @@
 
     #message.error {
       color: red;
+    }
+
+    /* Responsividade para telas menores */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 48px;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+      .upload-box {
+        padding: 30px;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 12px 24px;
+      }
+
+      input[type="file"] {
+        font-size: 16px;
+      }
+
+      #message {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+
+      .upload-box {
+        padding: 20px;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+
+      input[type="file"] {
+        font-size: 14px;
+      }
+
+      #message {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
