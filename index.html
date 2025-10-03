@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Casamento R | A</title>
   <style>
-    /* Carregando a fonte personalizada */
+    /* Fonte personalizada */
     @font-face {
       font-family: "DearScript";
       src: url("Dear Script (Demo_Font).otf") format("opentype");
@@ -13,9 +13,23 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background: #ffffff;
-      padding: 40px;
+      background: url("aquarela_borda.jpg") no-repeat center center fixed;
+      background-size: cover;
       margin: 0;
+      padding: 0;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+      box-sizing: border-box;
+      border: 60px solid transparent;
+      -webkit-border-image: url("aquarela_borda.jpg") 60 round;
+      border-image: url("sua-imagem.png") 60 round;
     }
 
     h1 {
@@ -56,6 +70,7 @@
       font-size: 18px;
       transition: background 0.3s ease;
     }
+
     button:hover {
       background: #3d3d3d;
     }
@@ -65,41 +80,27 @@
       font-size: 16px;
       font-weight: bold;
     }
+
     #message.success {
       color: green;
     }
+
     #message.error {
       color: red;
     }
-
-    body {
-  background: url("aquarela_borda.jpg") no-repeat center center fixed;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
-}
-
-/* Moldura */
-.page-wrapper {
-  border: 60px solid transparent;
-  -webkit-border-image: url("aquarela_borda.jpg") 60 round; 
-  border-image: url("sua-imagem.png") 60 round;
-  min-height: 100vh;
-}
   </style>
 </head>
 <body>
+  <div class="page-wrapper">
+    <h1> Casamento R | A </h1>
+    <p>Compartilhe suas fotos e vídeos deste momento especial</p>
 
-  <h1> Casamento R | A </h1>
-  <p>Compartilhe suas fotos e vídeos deste momento especial</p>
-
-  <div class="upload-box">
-    <input type="file" id="fileInput" accept="image/*,video/*">
-    <button onclick="uploadFile()">Enviar Foto/Vídeo</button>
-    <p id="message"></p>
+    <div class="upload-box">
+      <input type="file" id="fileInput" accept="image/*,video/*">
+      <button onclick="uploadFile()">Enviar Foto/Vídeo</button>
+      <p id="message"></p>
+    </div>
   </div>
-
-  <div class="footer"></div>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTrXhAmBg2WmTvaF_fztuk7jpULrvwofssgBkSghAaeXpKTjBgYwXD6Axe146fAoyq/exec";
@@ -133,7 +134,7 @@
           if (result.status === "success") {
             messageEl.className = "success";
             messageEl.innerText = "✅ Arquivo enviado com sucesso!";
-            fileInput.value = ""; // limpa o campo
+            fileInput.value = "";
           } else {
             messageEl.className = "error";
             messageEl.innerText = "❌ Erro: " + result.message;
@@ -146,6 +147,5 @@
       reader.readAsDataURL(file);
     }
   </script>
-
 </body>
 </html>
